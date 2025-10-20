@@ -2,17 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import { Folder, ArrowLeft } from 'lucide-react'
 
-interface FileNode {
-  name: string
-  path: string
-  isDir: boolean
-  children?: FileNode[]
-  fileUrl?: string
-}
-
 interface DirectoryListProps {
   tree: FileNode[]
-  onDirectoryImages: (urls: string[]) => void
+  onDirectoryImages: (files: File[]) => void
 }
 
 export default function DirectoryList({ tree, onDirectoryImages }: DirectoryListProps) {
@@ -28,7 +20,7 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
 
   const handleFolderClick = (node: FileNode) => {
     if (node.children && node.children.length > 0) {
-      setPathStack((prev) => [...prev, node.children])
+      setPathStack((prev) => [...prev, node.children!])
       const images = collectAllImages(node.children)
       onDirectoryImages(images)
     }
@@ -44,9 +36,9 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
     }
   }
 
-  const collectAllImages = (nodes: FileNode[]): string[] => {
+  const collectAllImages = (nodes: FileNode[]): File[] => {
     return nodes.flatMap((n) =>
-      n.isDir && n.children ? collectAllImages(n.children) : n.fileUrl ? [n.fileUrl] : []
+      n.isDir && n.children ? collectAllImages(n.children) : n.file ? [n.file] : []
     )
   }
 
@@ -55,7 +47,7 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-lg font-semibold">Explorer</h2>
         {pathStack.length > 1 && (
-          <button onClick={handleBack} className="flex items-center gap-1 text-sm">
+          <button onClick={handleBack} className="flex items-center gap-1 text-sm hover:underline">
             <ArrowLeft size={16} /> Back
           </button>
         )}
@@ -67,11 +59,11 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
           .map((node) => (
             <li
               key={node.path}
-              className="flex items-center gap-2 p-2 rounded-md"
+              className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 cursor-pointer"
               onClick={() => handleFolderClick(node)}
             >
               <Folder size={18} />
-              {<span className="truncate">{node.name}</span>}
+              <span className="truncate">{node.name}</span>
             </li>
           ))}
       </ul>

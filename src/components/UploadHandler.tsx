@@ -1,14 +1,6 @@
 'use client'
 import React from 'react'
 
-interface FileNode {
-  name: string
-  path: string
-  isDir: boolean
-  children?: FileNode[]
-  fileUrl?: string
-}
-
 interface UploadHandlerProps {
   onTreeReady: (tree: FileNode[]) => void
 }
@@ -38,10 +30,10 @@ export default function UploadHandler({ onTreeReady }: UploadHandlerProps) {
           currentLevel.push(existing)
         }
 
-        // Leaf file node (image)
+        // Leaf file node (image) - STORE THE FILE OBJECT
         if (index === parts.length - 1) {
           existing.isDir = false
-          existing.fileUrl = URL.createObjectURL(file)
+          existing.file = file // Store actual File object, not URL
         } else if (existing.children) {
           currentLevel = existing.children
         }
@@ -62,7 +54,7 @@ export default function UploadHandler({ onTreeReady }: UploadHandlerProps) {
     <div className="flex items-center justify-center border-2 border-dashed border-neutral-2 rounded-lg p-12">
       <label
         htmlFor="folderUpload"
-        className="flex flex-col items-center justify-center w-full h-full text-center cursor-inverted"
+        className="flex flex-col items-center justify-center w-full h-full text-center cursor-pointer"
       >
         <span className="font-medium text-lg">Click to upload a folder</span>
         <span className="text-sm mt-1">Only image files are processed</span>
