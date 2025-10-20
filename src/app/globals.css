@@ -1,21 +1,42 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #2e2e2e;
+  --background: #e2e2e2;
+  --cursor: url('/cursor.svg');
+  --cursor-active: url('/cursor_inverted.svg');
+
+  --black: #2e2e2e;
+  --neutral-1: #777777;
+  --neutral-2: #555555;
+  --neutral-3: #333333;
+  --white: #e2e2e2;
+  --box-shadow:
+    0 2px 6px rgba(var(--neutral-3), 25%), 0 8px 24px rgba(var(--neutral-3), 33%),
+    0 16px 32px rgba(var(--neutral-3), 33%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-black: var(--black);
+  --color-white: var(--white);
+  --color-neutral-1: var(--neutral-1);
+  --color-neutral-2: var(--neutral-2);
+  --color-neutral-3: var(--neutral-3);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #121212;
+    --foreground: #d1d1d1;
+    --neutral-1: #888888;
+    --neutral-2: #aaaaaa;
+    --neutral-3: #cccccc;
+    --cursor: url('/cursor_inverted.svg');
+    --cursor-active: url('/cursor.svg');
   }
 }
 
@@ -23,4 +44,20 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  cursor: var(--cursor), auto;
+}
+
+button:hover {
+  cursor: var(--cursor-active), auto;
+}
+a:hover {
+  cursor: var(--cursor-active), auto;
+}
+
+.cursor {
+  cursor: var(--cursor), auto;
+}
+
+.cursor-inverted {
+  cursor: var(--cursor-active), auto;
 }
