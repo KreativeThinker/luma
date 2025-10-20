@@ -1,4 +1,4 @@
-interface FileNode {
+export interface FileNode {
   name: string
   path: string
   isDir: boolean

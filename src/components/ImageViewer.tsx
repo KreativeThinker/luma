@@ -101,6 +101,7 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
         {imageUrls.map((img, idx) => (
           <SwiperSlide key={idx}>
             <div className="relative flex items-center justify-center h-screen select-none">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={img.url}
                 alt={img.name}

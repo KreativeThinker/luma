@@ -1,4 +1,5 @@
 'use client'
+import { FileNode } from '@/types/FileNode'
 import React from 'react'
 
 interface UploadHandlerProps {
@@ -42,7 +43,8 @@ export default function UploadHandler({ onTreeReady }: UploadHandlerProps) {
 
     const tree: FileNode[] = []
     imageFiles.forEach((file) => {
-      const relPath = (file as any).webkitRelativePath || file.name
+      const relPath =
+        (file as File & { webkitRelativePath?: string }).webkitRelativePath || file.name
       const parts = relPath.split('/').filter(Boolean)
       insertNode(tree, parts, file)
     })
@@ -62,7 +64,7 @@ export default function UploadHandler({ onTreeReady }: UploadHandlerProps) {
       <input
         id="folderUpload"
         type="file"
-        // @ts-ignore
+        // @ts-expect-error - webkitdirectory is not in TypeScript types yet
         webkitdirectory="true"
         directory="true"
         multiple

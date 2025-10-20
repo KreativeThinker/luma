@@ -45,6 +45,7 @@ export default function MasonryGrid({ files }: MasonryGridProps) {
           <motion.div
             key={`${file.name}-${i}`}
             layoutId={fileUrls[i]}
+            // @ts-expect-error - webkitdirectory is not in TypeScript types yet
             variants={hoverVariants}
             initial="initial"
             whileHover="hover"

@@ -1,14 +1,7 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Folder, ArrowLeft } from 'lucide-react'
-
-interface FileNode {
-  name: string
-  path: string
-  isDir: boolean
-  children?: FileNode[]
-  file?: File
-}
+import { FileNode } from '@/types/FileNode'
 
 interface DirectoryListProps {
   tree: FileNode[]
@@ -20,13 +13,20 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
 
   const currentDir = pathStack[pathStack.length - 1]
 
-  // Load all images on first render (root)
+  // Wrap collectAllImages in useCallback
+  const collectAllImages = useCallback((nodes: FileNode[]): File[] => {
+    return nodes.flatMap((n) =>
+      n.isDir && n.children ? collectAllImages(n.children) : n.file ? [n.file] : []
+    )
+  }, [])
+
+  // Then the useEffect dependency array is fine
   useEffect(() => {
     console.log('DirectoryList mounted, tree:', tree)
     const allImages = collectAllImages(tree)
     console.log('Collected images on mount:', allImages.length)
     onDirectoryImages(allImages)
-  }, [tree])
+  }, [tree, collectAllImages, onDirectoryImages])
 
   const handleFolderClick = (node: FileNode) => {
     console.log('Folder clicked:', node.name, 'has children:', !!node.children)
@@ -47,13 +47,6 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
       console.log('Back pressed, images:', images.length)
       onDirectoryImages(images)
     }
-  }
-
-  const collectAllImages = (nodes: FileNode[]): File[] => {
-    const files = nodes.flatMap((n) =>
-      n.isDir && n.children ? collectAllImages(n.children) : n.file ? [n.file] : []
-    )
-    return files
   }
 
   console.log('Current dir:', currentDir.length, 'items')
