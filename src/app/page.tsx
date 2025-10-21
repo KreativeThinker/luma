@@ -3,28 +3,43 @@ import { AnimatePresence, motion } from 'framer-motion'
 import UploadHandler from '@/components/UploadHandler'
 import DirectoryList from '@/components/DirectoryList'
 import MasonryGrid from '@/components/MasonryGrid'
+import { FileNode } from '@/types/FileNode'
 import React, { useState } from 'react'
 import { Menu, X } from 'lucide-react'
-
-// Updated FileNode interface - removed fileUrl, added file
-interface FileNode {
-  name: string
-  path: string
-  isDir: boolean
-  children?: FileNode[]
-  file?: File // Changed from fileUrl to file
-}
+import Link from 'next/link'
 
 export default function App() {
   const [tree, setTree] = useState<FileNode[]>([])
-  const [activeImages, setActiveImages] = useState<File[]>([]) // Changed from string[] to File[]
+  const [activeImages, setActiveImages] = useState<File[]>([])
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-6">
+    <div className="min-h-screen flex flex-col items-center">
       {!tree.length ? (
-        <div className="w-full max-w-2xl mt-20">
-          <UploadHandler onTreeReady={setTree} />
+        <div className="flex flex-1 flex-col items-center w-full justify-center min-h-screen gap-12 px-4 md:flex-row md:gap-16">
+          {/* Left/Text Section */}
+          <div className="flex flex-col items-start justify-center text-left space-y-4">
+            <h1 className="text-6xl md:text-8xl font-extrabold">Luma</h1>
+            <h4 className="text-xl md:text-2xl leading-relaxed">Local Image Viewer</h4>
+            <ul className="list-disc space-y-2 text-sm md:text-base">
+              <li>Upload folders directly from your file system</li>
+              <li>Preview in a responsive masonry grid</li>
+              <li>Navigate images with keyboard shortcuts</li>
+            </ul>
+            <a
+              href="https://github.com/kreativethinker/luma"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-sm md:text-base rounded-lg hover:underline underline-offset-2"
+            >
+              View source on GitHub ↗
+            </a>
+          </div>
+
+          {/* Upload Section */}
+          <div className="flex items-center justify-center w-full max-w-xl">
+            <UploadHandler onTreeReady={setTree} />
+          </div>
         </div>
       ) : (
         <div className="w-full flex gap-6 relative">
@@ -32,7 +47,7 @@ export default function App() {
           {!isDrawerOpen && (
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="lg:hidden fixed left-4 top-6 z-40 p-3 bg-white rounded-lg shadow-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+              className="lg:hidden fixed left-4 top-6 z-40 p-3 bg-neutral-1 rounded-lg shadow-lg border border-gray-200 hover:bg-neutral-2 transition-colors"
               aria-label="Open directory explorer"
             >
               <Menu size={24} />
