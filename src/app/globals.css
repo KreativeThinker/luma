@@ -10,6 +10,7 @@
   --neutral-1: #777777;
   --neutral-2: #555555;
   --neutral-3: #333333;
+  --card: #dadada;
   --white: #e2e2e2;
   --box-shadow:
     0 2px 6px rgba(var(--neutral-3), 25%), 0 8px 24px rgba(var(--neutral-3), 33%),
@@ -24,6 +25,7 @@
   --color-neutral-1: var(--neutral-1);
   --color-neutral-2: var(--neutral-2);
   --color-neutral-3: var(--neutral-3);
+  --color-card: var(--card);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -35,6 +37,7 @@
     --neutral-1: #888888;
     --neutral-2: #aaaaaa;
     --neutral-3: #cccccc;
+    --card: #242424;
     --cursor: url('/cursor_inverted.svg');
     --cursor-active: url('/cursor.svg');
   }

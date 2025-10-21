@@ -53,12 +53,12 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
 
   return (
     <div className="p-4 w-full">
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex justify-between mb-4">
         <h2 className="text-lg font-semibold">Explorer</h2>
         {pathStack.length > 1 && (
           <button
             onClick={handleBack}
-            className="flex items-center gap-1 text-sm hover:underline cursor-pointer"
+            className="flex mt-12 items-center gap-1 text-sm hover:font-semibold transition-all"
           >
             <ArrowLeft size={16} /> Back
           </button>
@@ -71,7 +71,7 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
           .map((node) => (
             <li
               key={node.path}
-              className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 cursor-pointer transition-colors"
+              className="flex items-center gap-2 p-2 rounded-md hover:bg-background transition-colors hover:font-semibold"
               onClick={() => handleFolderClick(node)}
             >
               <Folder size={18} className="flex-shrink-0" />

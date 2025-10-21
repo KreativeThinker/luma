@@ -14,7 +14,7 @@ export default function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
+    <div className="min-h-screen flex flex-col items-center mx-4 md:mx-8 lg:mx-12">
       {!tree.length ? (
         <div className="flex flex-1 flex-col items-center w-full justify-center min-h-screen gap-12 px-4 md:flex-row md:gap-16">
           {/* Left/Text Section */}
@@ -42,12 +42,12 @@ export default function App() {
           </div>
         </div>
       ) : (
-        <div className="w-full flex gap-6 relative">
+        <div className="w-full flex gap-4 relative">
           {/* Mobile drawer toggle button - only visible when drawer is closed */}
           {!isDrawerOpen && (
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="lg:hidden fixed left-4 top-6 z-40 p-3 bg-neutral-1 rounded-lg shadow-lg border border-gray-200 hover:bg-neutral-2 transition-colors"
+              className="lg:hidden fixed -left-1.5 top-4 z-40 p-3 bg-card rounded-lg shadow-lg border-2 border-neutral-2"
               aria-label="Open directory explorer"
             >
               <Menu size={24} />
@@ -69,8 +69,8 @@ export default function App() {
 
           {/* Sidebar with directory tree */}
           {/* Desktop: always visible */}
-          <aside className="hidden lg:block w-80 flex-shrink-0 sticky top-6 self-start">
-            <div className="bg-white rounded-lg shadow-md border border-gray-200">
+          <aside className="hidden lg:block w-80 top-4 flex-shrink-0 sticky self-start">
+            <div className="bg-card rounded-lg shadow-md">
               <DirectoryList tree={tree} onDirectoryImages={setActiveImages} />
             </div>
           </aside>
@@ -85,11 +85,11 @@ export default function App() {
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 className="lg:hidden fixed left-0 top-0 bottom-0 z-50 w-80"
               >
-                <div className="bg-white rounded-lg shadow-md border border-gray-200 h-full overflow-hidden flex flex-col">
+                <div className="bg-background rounded-r-lg shadow-md h-full overflow-hidden flex flex-col">
                   {/* Close button - fixed to the right side of the panel */}
                   <button
                     onClick={() => setIsDrawerOpen(false)}
-                    className="absolute right-4 top-4 z-10 p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                    className="absolute right-4 top-4 z-10 p-2 rounded-lg bg-card hover:bg-background transition-colors"
                     aria-label="Close directory explorer"
                   >
                     <X size={20} />
@@ -104,7 +104,7 @@ export default function App() {
           </AnimatePresence>
 
           {/* Main content area with masonry grid */}
-          <main className="flex-1 min-w-0 lg:ml-0">
+          <main className="flex-1">
             <MasonryGrid files={activeImages} />
           </main>
         </div>
