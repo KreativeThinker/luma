@@ -42,6 +42,16 @@ pnpm start
 
 ---
 
+## Challenges and Issues
+
+1. Bulk uploads of folder sizes > 2GB can cause lag in the system.
+2. Attempts at lazy-loading images with an intersection observer ran into issues with the files not loading in the correct order
+3. Only allows for Directory/Folder uploads
+4. Insufficient customization and control
+5. I attempted to add face recognition and clustering but was unable to do so without increasing the computational cost in the system
+
+---
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
