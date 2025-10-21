@@ -76,50 +76,55 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
       </div>
 
       {/* Carousel */}
-      <Swiper
-        modules={[EffectCoverflow, Navigation, Keyboard]}
-        effect="coverflow"
-        grabCursor
-        centeredSlides
-        slidesPerView={2.4}
-        loop
-        initialSlide={initialIndex}
-        keyboard={{ enabled: true }}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 200,
-          modifier: 2.5,
-          slideShadows: false,
-        }}
-        className="w-full h-full flex items-center justify-center"
-      >
-        {imageUrls.map((img, idx) => (
-          <SwiperSlide key={idx}>
-            <div className="relative flex items-center justify-center h-screen select-none">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={img.url}
-                alt={img.name}
-                draggable={false}
-                className="max-h-[85vh] max-w-[85vw] object-contain transition-all duration-500"
-              />
-            </div>
-          </SwiperSlide>
-        ))}
+      <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+        {/* Vignette overlay */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.6)_100%)] z-[50]" />
 
-        {/* Navigation Arrows */}
-        <div className="swiper-button-prev !left-6 z-[60] after:hidden">
-          <ChevronLeft className="w-8 h-8 text-white opacity-80 hover:opacity-100 transition" />
-        </div>
-        <div className="swiper-button-next !right-6 z-[60] after:hidden">
-          <ChevronRight className="w-8 h-8 text-white opacity-80 hover:opacity-100 transition" />
-        </div>
-      </Swiper>
+        <Swiper
+          modules={[EffectCoverflow, Navigation, Keyboard]}
+          effect="coverflow"
+          grabCursor
+          centeredSlides
+          slidesPerView={2.4}
+          loop
+          initialSlide={initialIndex}
+          keyboard={{ enabled: true }}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          }}
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 200,
+            modifier: 2.5,
+            slideShadows: false,
+          }}
+          className="w-full h-full flex items-center justify-center"
+        >
+          {imageUrls.map((img, idx) => (
+            <SwiperSlide key={idx}>
+              <div className="relative flex items-center justify-center h-screen select-none">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={img.url}
+                  alt={img.name}
+                  draggable={false}
+                  className="max-h-[85vh] max-w-[85vw] object-contain transition-all duration-500"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+
+          {/* Navigation Arrows */}
+          <div className="swiper-button-prev !left-6 z-[60] after:hidden">
+            <ChevronLeft className="w-8 h-8 text-white opacity-80 hover:opacity-100 transition" />
+          </div>
+          <div className="swiper-button-next !right-6 z-[60] after:hidden">
+            <ChevronRight className="w-8 h-8 text-white opacity-80 hover:opacity-100 transition" />
+          </div>
+        </Swiper>
+      </div>
 
       {showMetadata && (
         <motion.div
