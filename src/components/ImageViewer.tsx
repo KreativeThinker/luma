@@ -64,22 +64,22 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
       <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
         <button
           onClick={() => setShowMetadata(!showMetadata)}
-          className="p-2 bg-black/10 hover:bg-black/20 rounded-full text-white backdrop-blur"
+          className="rounded-full bg-black/10 p-2 text-white backdrop-blur hover:bg-black/20"
         >
           <InfoIcon size={18} />
         </button>
         <button
           onClick={onClose}
-          className="p-2 bg-black/10 hover:bg-black/20 rounded-full text-white backdrop-blur"
+          className="rounded-full bg-black/10 p-2 text-white backdrop-blur hover:bg-black/20"
         >
           <X size={18} />
         </button>
       </div>
 
       {/* Carousel */}
-      <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+      <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
         {/* Vignette overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.6)_100%)] z-[50]" />
+        <div className="pointer-events-none absolute inset-0 z-[50] bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(0,0,0,0.6)_100%)]" />
 
         <Swiper
           modules={[EffectCoverflow, Navigation, Keyboard]}
@@ -102,11 +102,11 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
             slideShadows: false,
           }}
           onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)} // ← Add this line
-          className="w-full h-full flex items-center justify-center"
+          className="flex h-full w-full items-center justify-center"
         >
           {imageUrls.map((img, idx) => (
             <SwiperSlide key={idx}>
-              <div className="relative flex items-center justify-center h-screen select-none">
+              <div className="relative flex h-screen items-center justify-center select-none">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={img.url}
@@ -120,10 +120,10 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
 
           {/* Navigation Arrows */}
           <div className="swiper-button-prev !left-6 z-[60] after:hidden">
-            <ChevronLeft className="w-8 h-8 text-white opacity-80 hover:opacity-100 transition" />
+            <ChevronLeft className="h-8 w-8 text-white opacity-80 transition hover:opacity-100" />
           </div>
           <div className="swiper-button-next !right-6 z-[60] after:hidden">
-            <ChevronRight className="w-8 h-8 text-white opacity-80 hover:opacity-100 transition" />
+            <ChevronRight className="h-8 w-8 text-white opacity-80 transition hover:opacity-100" />
           </div>
         </Swiper>
       </div>
@@ -133,14 +133,14 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
-          className="absolute top-0 right-0 bottom-0 w-80 bg-black/80 backdrop-blur-xl p-6 overflow-y-auto z-[70]"
+          className="absolute top-0 right-0 bottom-0 z-[70] w-80 overflow-y-auto bg-black/80 p-6 backdrop-blur-xl"
         >
           {/* Header with close button */}
-          <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-4">
+          <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-2">
             <h3 className="text-lg font-semibold text-white">Image Info</h3>
             <button
               onClick={() => setShowMetadata(false)}
-              className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur"
+              className="rounded-full bg-white/10 p-2 text-white backdrop-blur hover:bg-white/20"
               title="Close"
             >
               <X size={18} />
@@ -151,8 +151,8 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
           {imageUrls[currentIndex] &&
             Object.entries(imageUrls[currentIndex].metadata).map(([key, val]) => (
               <div key={key} className="mb-3">
-                <div className="text-xs text-gray-400 uppercase tracking-wider">{key}</div>
-                <div className="text-sm text-white font-mono break-all">{val}</div>
+                <div className="text-xs tracking-wider text-gray-400 uppercase">{key}</div>
+                <div className="font-mono text-sm break-all text-white">{val}</div>
               </div>
             ))}
         </motion.div>

@@ -13,11 +13,13 @@ Luma is a minimal implementation of a Client Side Directory Image Viewer. Simply
 ---
 
 ## Features
+
 1. Fully Private - No server ever
 2. Fast
 3. Intuitive UI/UX
 4. Available in LIGHT theme (Tried my best to not make it an eyesore)
 5. Easy navigation using Directory Explorer
+
 ---
 
 ## Installation

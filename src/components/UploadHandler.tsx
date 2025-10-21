@@ -55,20 +55,20 @@ export default function UploadHandler({ onTreeReady }: UploadHandlerProps) {
   }
 
   return (
-    <div className="flex items-center justify-center border-2 border-dashed border-neutral-2 rounded-2xl w-full aspect-video transition-transform duration-300 hover:scale-105">
+    <div className="border-neutral-2 flex aspect-video w-full items-center justify-center rounded-2xl border-2 border-dashed transition-transform duration-300 hover:scale-105">
       <label
         htmlFor="folderUpload"
-        className="flex flex-col items-center justify-center w-full h-full text-center cursor-inverted p-12 transition-colors duration-300"
+        className="cursor-inverted flex h-full w-full flex-col items-center justify-center p-12 text-center transition-colors duration-300"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
         {hovered ? (
-          <FolderOpen className="h-8 w-8 text-neutral-12 transition-transform duration-200 scale-110" />
+          <FolderOpen className="text-neutral-12 h-8 w-8 scale-110 transition-transform duration-200" />
         ) : (
-          <Folder className="h-8 w-8 text-neutral-12 transition-transform duration-200" />
+          <Folder className="text-neutral-12 h-8 w-8 transition-transform duration-200" />
         )}
-        <span className="font-semibold text-lg mt-2">Click to upload a folder</span>
-        <span className="text-sm text-neutral-1 mt-1">Only image files are processed</span>
+        <span className="mt-2 text-lg font-semibold">Click to upload a folder</span>
+        <span className="text-neutral-1 mt-1 text-sm">Only image files are processed</span>
       </label>
 
       <input
