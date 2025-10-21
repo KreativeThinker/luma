@@ -1,5 +1,0 @@
-ignoredBuiltDependencies:
-  - spawn-sync
-
-onlyBuiltDependencies:
-  - pre-commit
