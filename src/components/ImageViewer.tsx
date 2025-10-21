@@ -17,6 +17,7 @@ interface ImageViewerProps {
 
 export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageViewerProps) {
   const [showMetadata, setShowMetadata] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(initialIndex)
 
   // Create blob URLs for each file
   const imageUrls = useMemo(
@@ -100,6 +101,7 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
             modifier: 2.5,
             slideShadows: false,
           }}
+          onSlideChange={(swiper) => setCurrentIndex(swiper.realIndex)} // ← Add this line
           className="w-full h-full flex items-center justify-center"
         >
           {imageUrls.map((img, idx) => (
@@ -111,7 +113,6 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
                   alt={img.name}
                   draggable={false}
                   className="max-h-[85vh] max-w-[85vw] object-contain transition-all duration-500"
-                  loading="lazy"
                 />
               </div>
             </SwiperSlide>
@@ -147,8 +148,8 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
           </div>
 
           {/* Metadata entries */}
-          {imageUrls[initialIndex] &&
-            Object.entries(imageUrls[initialIndex].metadata).map(([key, val]) => (
+          {imageUrls[currentIndex] &&
+            Object.entries(imageUrls[currentIndex].metadata).map(([key, val]) => (
               <div key={key} className="mb-3">
                 <div className="text-xs text-gray-400 uppercase tracking-wider">{key}</div>
                 <div className="text-sm text-white font-mono break-all">{val}</div>
