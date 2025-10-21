@@ -2,15 +2,20 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Folder, ArrowLeft } from 'lucide-react'
 import { FileNode } from '@/types/FileNode'
+import UploadHandler from '@/components/UploadHandler'
 
 interface DirectoryListProps {
   tree: FileNode[]
   onDirectoryImages: (files: File[]) => void
+  onUploadMore?: (newTree: FileNode[]) => void
 }
 
-export default function DirectoryList({ tree, onDirectoryImages }: DirectoryListProps) {
+export default function DirectoryList({
+  tree,
+  onDirectoryImages,
+  onUploadMore,
+}: DirectoryListProps) {
   const [pathStack, setPathStack] = useState<FileNode[][]>([tree])
-
   const currentDir = pathStack[pathStack.length - 1]
 
   // Wrap collectAllImages in useCallback
@@ -49,6 +54,12 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
     }
   }
 
+  const handleNewFolder = (newTree: FileNode[]) => {
+    if (onUploadMore) {
+      onUploadMore(newTree)
+    }
+  }
+
   console.log('Current dir:', currentDir.length, 'items')
 
   return (
@@ -82,6 +93,13 @@ export default function DirectoryList({ tree, onDirectoryImages }: DirectoryList
 
       {currentDir.filter((n) => n.isDir).length === 0 && (
         <div className="py-4 text-center text-sm text-gray-400">No subdirectories</div>
+      )}
+
+      {/* Upload More Section */}
+      {onUploadMore && (
+        <div className="w-full mt-auto mb-4">
+          <UploadHandler onTreeReady={handleNewFolder} />
+        </div>
       )}
     </div>
   )

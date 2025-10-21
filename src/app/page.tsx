@@ -12,6 +12,11 @@ export default function App() {
   const [activeImages, setActiveImages] = useState<File[]>([])
   const [isDrawerOpen, setIsDrawerOpen] = useState(true)
 
+  const handleUploadMore = (newTree: FileNode[]) => {
+    // Merge the new tree with the existing tree
+    setTree((prevTree) => [...prevTree, ...newTree])
+  }
+
   return (
     <div className="mx-4 flex min-h-screen flex-col items-center md:mx-8 lg:mx-12">
       {!tree.length ? (
@@ -87,7 +92,11 @@ export default function App() {
                   </button>
 
                   <div className="mt-12 flex-1 overflow-y-auto">
-                    <DirectoryList tree={tree} onDirectoryImages={setActiveImages} />
+                    <DirectoryList
+                      tree={tree}
+                      onDirectoryImages={setActiveImages}
+                      onUploadMore={handleUploadMore}
+                    />
                   </div>
                 </div>
               </motion.aside>
