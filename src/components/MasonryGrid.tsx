@@ -49,7 +49,7 @@ export default function MasonryGrid({ files }: MasonryGridProps) {
             variants={hoverVariants}
             initial="initial"
             whileHover="hover"
-            className="relative mb-4 break-inside-avoid cursor-pointer"
+            className="relative mb-4 break-inside-avoid cursor-inverted"
             onClick={(e) => {
               e.stopPropagation()
               console.log('Image clicked:', i, file.name)
@@ -62,13 +62,6 @@ export default function MasonryGrid({ files }: MasonryGridProps) {
               className="w-full rounded-lg object-cover bg-gray-200 pointer-events-none"
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-            />
-
-            {/* Subtle overlay on hover */}
-            <motion.div
-              className="absolute inset-0 rounded-lg bg-black/0 pointer-events-none"
-              whileHover={{ backgroundColor: 'rgba(0,0,0,0.1)' }}
-              transition={{ duration: 0.25 }}
             />
           </motion.div>
         ))}

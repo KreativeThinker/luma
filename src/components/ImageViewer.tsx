@@ -63,13 +63,13 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
       <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
         <button
           onClick={() => setShowMetadata(!showMetadata)}
-          className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur"
+          className="p-2 bg-black/10 hover:bg-black/20 rounded-full text-white backdrop-blur"
         >
           <InfoIcon size={18} />
         </button>
         <button
           onClick={onClose}
-          className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur"
+          className="p-2 bg-black/10 hover:bg-black/20 rounded-full text-white backdrop-blur"
         >
           <X size={18} />
         </button>
@@ -126,7 +126,7 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
-          className="absolute top-0 right-0 bottom-0 w-80 bg-black/80 backdrop-blur-xl border-l border-white/10 p-6 overflow-y-auto z-[70]"
+          className="absolute top-0 right-0 bottom-0 w-80 bg-black/80 backdrop-blur-xl p-6 overflow-y-auto z-[70]"
         >
           {/* Header with close button */}
           <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-4">
