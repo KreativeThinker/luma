@@ -111,6 +111,7 @@ export default function ImageViewer({ files, initialIndex = 0, onClose }: ImageV
                   alt={img.name}
                   draggable={false}
                   className="max-h-[85vh] max-w-[85vw] object-contain transition-all duration-500"
+                  loading="lazy"
                 />
               </div>
             </SwiperSlide>

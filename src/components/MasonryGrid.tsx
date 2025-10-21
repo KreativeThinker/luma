@@ -62,6 +62,7 @@ export default function MasonryGrid({ files }: MasonryGridProps) {
               className="w-full rounded-lg object-cover bg-gray-200 pointer-events-none"
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 200, damping: 18 }}
+              loading="lazy"
             />
           </motion.div>
         ))}
